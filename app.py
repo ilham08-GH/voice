@@ -9,7 +9,7 @@ from st_audiorec import st_audiorec  # Library untuk merekam audio
 SR = 16000
 DURATION = 1
 SAMPLES = SR * DURATION
-THRESHOLD = 80  # Threshold keyakinan (80%)
+THRESHOLD = 85  # Threshold keyakinan (80%)
 
 # --- Fungsi untuk Memuat Model (dengan Caching) ---
 @st.cache_resource
@@ -132,13 +132,17 @@ if model is not None and scaler is not None and le is not None:
             label_rec, confidence_rec = predict_audio(y_rec, sr_rec, model, scaler, le)
             
             # Tampilkan hasil
-            st.subheader("Hasil Prediksi (dari Rekaman):")
-            if confidence_rec >= THRESHOLD:
-                st.success(f"✅ Dikenali sebagai: **{label_rec}**")
-                st.info(f"Keyakinan: **{confidence_rec:.2f}%**")
+            st.subheader("Hasil Prediksi (dari File):")
+            if confidence >= THRESHOLD:
+                st.success(f"✅ Dikenali sebagai: **{label}**")
+                st.info(f"Keyakinan: **{confidence:.2f}%**")
             else:
+                # --- MODIFIKASI DI SINI ---
+                # Ambil hanya perintah (misal: "tutup" dari "tutup_orang_1")
+                perintah_terdekat = label.split('_')[0]
+                
                 st.error(f"❌ Suara tidak dikenali.")
-                st.info(f"Prediksi terdekat: {label_rec} (Keyakinan: {confidence_rec:.2f}%) - Di bawah threshold {THRESHOLD}%")
+                st.info(f"Prediksi terdekat: **{perintah_terdekat}** (Keyakinan: {confidence:.2f}%) - Di bawah threshold {THRESHOLD}%")
 
         except Exception as e:
             st.error(f"Error saat memproses audio rekaman: {e}")
