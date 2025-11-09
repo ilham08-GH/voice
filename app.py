@@ -10,7 +10,7 @@ from st_audiorec import st_audiorec
 SR = 16000
 DURATION = 1
 SAMPLES = SR * DURATION
-# Threshold diperbarui menjadi 85%
+# Threshold diatur ke 85%
 THRESHOLD = 85  
 
 # --- Fungsi untuk Memuat Model (dengan Caching) ---
@@ -106,8 +106,8 @@ if model is not None and scaler is not None and le is not None:
                 st.success(f"✅ Dikenali sebagai: **{label}**")
                 st.info(f"Keyakinan: **{confidence:.2f}%**")
             else:
-                # --- MODIFIKASI: Hanya tampilkan perintah ---
-                perintah_terdekat = label.split('_')[0]
+                # --- MODIFIKASI: Ambil hanya kata perintah pertama ---
+                perintah_terdekat = label.split('_')[0].split(' ')[0]
                 st.error(f"❌ Suara tidak dikenali.")
                 st.info(f"Prediksi terdekat: **{perintah_terdekat}** (Keyakinan: {confidence:.2f}%) - Di bawah threshold {THRESHOLD}%")
         
@@ -140,8 +140,8 @@ if model is not None and scaler is not None and le is not None:
                 st.success(f"✅ Dikenali sebagai: **{label_rec}**")
                 st.info(f"Keyakinan: **{confidence_rec:.2f}%**")
             else:
-                # --- MODIFIKASI: Hanya tampilkan perintah & perbaikan confidence_rec ---
-                perintah_terdekat_rec = label_rec.split('_')[0]
+                # --- MODIFIKASI: Ambil hanya kata perintah pertama ---
+                perintah_terdekat_rec = label_rec.split('_')[0].split(' ')[0]
                 st.error(f"❌ Suara tidak dikenali.")
                 st.info(f"Prediksi terdekat: **{perintah_terdekat_rec}** (Keyakinan: {confidence_rec:.2f}%) - Di bawah threshold {THRESHOLD}%")
 
