@@ -4,4 +4,4 @@ scikit-learn
 librosa
 numpy
 soundfile
-st_audiorec
+streamlit-audiorec
