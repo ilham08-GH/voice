@@ -106,7 +106,7 @@ if model is not None and scaler is not None and le is not None:
                 st.info(f"Keyakinan: **{confidence:.2f}%**")
             else:
                 st.error(f"❌ Suara tidak dikenali.")
-                st.info(f"Prediksi terdekat: {label} (Keyakinan: {confidence:.2f}%) - Di bawah threshold {THRESHOLD}%")
+                st.info(f" (Keyakinan: {confidence:.2f}%) - Di bawah threshold {THRESHOLD}%")
         
         except Exception as e:
             st.error(f"Error saat memproses file audio: {e}")
