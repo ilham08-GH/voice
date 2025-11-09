@@ -9,7 +9,7 @@ from st_audiorec import st_audiorec  # Library untuk merekam audio
 SR = 16000
 DURATION = 1
 SAMPLES = SR * DURATION
-THRESHOLD = 85  # Threshold keyakinan (80%)
+THRESHOLD = 80  # Threshold keyakinan (80%)
 
 # --- Fungsi untuk Memuat Model (dengan Caching) ---
 @st.cache_resource
